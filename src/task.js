@@ -1,14 +1,10 @@
-const TaskStatus = Object.freeze({
-  PENDING: "pending",
-  INPROGRESS: "inprogress",
-  DONE: "done",
-})
+import { TaskStatus } from "./constants.js"
+
+let primaryKey = 0
 
 export class Task {
-  static primaryKey = 0
   constructor(description) {
-    primaryKey++
-    this.id = primaryKey
+    this.id = primaryKey++
     this.description = description
     this.status = TaskStatus.PENDING
     this.createdAt = new Date()
