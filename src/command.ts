@@ -23,7 +23,6 @@ const parseDescription = (descArray: string[]) => {
       description = descArray.join(" ")
       description = description.substring(1, description.length - 1)
     }
-    console.log("description", description)
     return description
   } catch (error) {
     throw error
@@ -33,7 +32,6 @@ const parseDescription = (descArray: string[]) => {
 const addTask = async (args: string[]): Promise<void> => {
   try {
     let description = parseDescription(args)
-    console.log(args)
     const id = await db.create(description)
     console.log(`Task added successfully (ID: ${id})`)
   } catch (error) {
