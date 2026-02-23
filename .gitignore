@@ -1,0 +1,5 @@
+data/
+dist/
+node_modules/
+*.json
+[А-Яа-я0-9]*.txt
