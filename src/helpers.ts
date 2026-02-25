@@ -1,6 +1,17 @@
 import * as fs from "node:fs/promises"
 import type { Encoding } from "node:crypto"
-import { CriticalError } from "./constants.js"
+import { CriticalError, STORAGE_CONFIG } from "./constants.js"
+import { existsSync, writeFileSync } from "fs"
+
+export const loadFile = (filePath: string) => {
+  if (!existsSync(filePath)) {
+    writeFileSync(
+      STORAGE_CONFIG.fileDatabase,
+      JSON.stringify([]),
+      STORAGE_CONFIG.encoding,
+    )
+  }
+}
 
 export const readFile = async (
   filePath: string,

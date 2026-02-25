@@ -22,6 +22,7 @@ export default class JsonFileDatabase implements Database {
   constructor() {
     try {
       ensureDirectoryExists(STORAGE_CONFIG.fileDatabase)
+      Helpers.loadFile(STORAGE_CONFIG.fileDatabase)
     } catch (error) {
       throw error
     }
