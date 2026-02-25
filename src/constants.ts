@@ -12,7 +12,7 @@ export const commands = {
 
 export const taskStatus = {
   TODO: "todo",
-  INPROGRESS: "in-progress", //ERROR! при конвертации в uppercase - не работает
+  INPROGRESS: "in-progress",
   DONE: "done",
 } as const
 
@@ -39,6 +39,10 @@ export const ERROR_MESSAGE = {
 export const WARN_MESSAGE = {
   EXTRA_ARGS: "Extra arguments ignored.",
 } as const
+
+export const INFO_MESSAGE = {
+  AVAILABLE_COMMANDS: `Commands: ${Object.values(commands).join(", ")}`,
+}
 
 export const formatError = (template: string, ...args: unknown[]): string => {
   return template.replace(/{(\d+)}/g, (match, index) => {

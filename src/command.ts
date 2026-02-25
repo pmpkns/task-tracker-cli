@@ -18,10 +18,10 @@ const parseDescription = (descArray: string[]) => {
     let description = ""
     if (descArray.length === 1) {
       if (!descArray[0]) throw new AppError(ERROR_MESSAGE.MISSING_ARGUMENTS)
-      description = descArray[0].substring(1, descArray[0].length - 1)
+      description = descArray[0]
     } else {
       description = descArray.join(" ")
-      description = description.substring(1, description.length - 1)
+      // description = description.substring(1, description.length - 1)
     }
     return description
   } catch (error) {

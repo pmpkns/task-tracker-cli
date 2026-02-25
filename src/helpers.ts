@@ -2,11 +2,6 @@ import * as fs from "node:fs/promises"
 import type { Encoding } from "node:crypto"
 import { CriticalError } from "./constants.js"
 
-// открытие файла => на выходе строка с контентом
-// парсинг файла из строки в массив => на выходе массив с данными
-// проведение операции => на выходе обновленный массив
-// запись массива в файл => void
-
 export const readFile = async (
   filePath: string,
   encoding: Encoding,

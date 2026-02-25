@@ -1,38 +1,29 @@
-import * as readline from "node:readline/promises"
-import { stdin as input, stdout as output } from "node:process"
+#!/usr/bin/env node
 import { Command } from "./command.js"
-import { AppError } from "./constants.js"
-
-const rl = readline.createInterface({ input, output })
+import { AppError, INFO_MESSAGE } from "./constants.js"
 
 const main = async () => {
-  console.log("Welcome to CLI Task Tracker!")
+  // process.argv[0] = node, process.argv[1] = path to script
+  const args = process.argv.slice(2)
 
-  while (true) {
-    try {
-      const input = await rl.question("> ")
-      if (!input.trim()) continue
-      const [cmd, ...args] = input.trim().toLowerCase().split(/\s+/)
-      const command = new Command(cmd as string, args)
-      await command.execute()
-    } catch (error) {
-      if ((error as any)?.code === "ABORT_ERR") {
-        console.log("\nInterrupted by user.")
-        try {
-          rl.close()
-        } catch (error) {}
-        process.exit(0)
-      }
-      if (error instanceof AppError) {
-        console.warn(error.message)
-        continue
-      } else {
-        console.error(error)
-        try {
-          rl.close()
-        } catch (error) {}
-        process.exit(1)
-      }
+  if (args.length === 0) {
+    console.log("Welcome to CLI Task Tracker!")
+    console.log("Usage: task-cli <command> [args]")
+    console.log(INFO_MESSAGE.AVAILABLE_COMMANDS)
+    return
+  }
+
+  try {
+    const [cmd, ...cmdArgs] = args
+    const command = new Command(cmd as string, cmdArgs)
+    await command.execute()
+  } catch (error) {
+    if (error instanceof AppError) {
+      console.warn(error.message)
+      process.exit(1)
+    } else {
+      console.error(error)
+      process.exit(1)
     }
   }
 }
